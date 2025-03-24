@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 
-char* code;
+char code[10000];
 
 
 void bftoc(char* buf){
@@ -11,34 +11,34 @@ void bftoc(char* buf){
 
     for (int i =0 ; i < length ; i++){
         if(buf[i] == '>'){
-            strcat(code , "ptr++;\n");
+            snprintf(code + strlen(code) , sizeof(code) - strlen(code) , "ptr++;\n");
         }
         else if(buf[i] == '<'){
-            strcat(code , "ptr--;\n");
+            snprintf(code + strlen(code) , sizeof(code) - strlen(code) , "ptr--;\n");
         }
 
         else if(buf[i] == '+'){
-            strcat(code , "(*ptr)++;\n");
+            snprintf(code + strlen(code) , sizeof(code) - strlen(code) , "(*ptr)++;\n");
         }
 
         else if(buf[i] == '-'){
-            strcat(code , "(*ptr)--;\n");
+            snprintf(code + strlen(code) , sizeof(code) - strlen(code) , "(*ptr)--;\n");
         }
 
         else if(buf[i] == '['){
-            strcat(code , "while (*ptr) {\n");
+            snprintf(code + strlen(code) , sizeof(code) - strlen(code) , "while (*ptr) {\n");
         }
 
         else if(buf[i] == ']'){
-            strcat(code , "    }\n");
+            snprintf(code + strlen(code) , sizeof(code) - strlen(code) , "    }\n");
         }
 
         else if(buf[i] == '.'){
-            strcat(code , "putchar(*ptr);\n");
+            snprintf(code + strlen(code) , sizeof(code) - strlen(code) , "putchar(*ptr);\n");
         }
 
         else if(buf[i] == ','){
-            strcat(code , "*ptr = getchar();\n");
+            snprintf(code + strlen(code) , sizeof(code) - strlen(code) ,"*ptr = getchar();\n");
 
         }
     }
@@ -52,9 +52,7 @@ int main(int argc , char* argv[]) {
     if(argc < 2){
         return 1;
     }
-
-    code = malloc(10000);
-    strcpy(code , "#include <stdio.h>\n int main(){ \n char array[30000] = {0}; \n char *ptr = array;\n");
+    snprintf(code + strlen(code) , sizeof(code) - strlen(code) , "#include <stdio.h>\n int main(){ \n char array[30000] = {0}; \n char *ptr = array;\n");
 
     FILE *fptr;
 
@@ -69,7 +67,7 @@ int main(int argc , char* argv[]) {
 
     bftoc(buf);
 
-    strcat(code , "return 0; \n }\n");
+    snprintf(code + strlen(code) , sizeof(code) - strlen(code) , "return 0; \n }\n");
 
     fclose(fptr);
     fptr = fopen("output.c" , "w");
