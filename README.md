@@ -1,17 +1,17 @@
 # Brainfuck Compiler
 
-A simple **Brainfuck-to-C transpiler** that converts Brainfuck code into equivalent C code, allowing you to compile it using a C compiler like `gcc`.
+A simple **Brainfuck-to-x86-64 assembly** that converts Brainfuck code into lower level assembly code, allowing you to compile it using a C compiler like `gcc`.
 
 ## Features
 
-- **Translates Brainfuck to C**
+- **Translates Brainfuck to Assembly**
 
 ## How to build the compiler
  - First do `gcc bf.c -o bf` This will compile the transpiler.
- - Then run `bf <source code>`
-- then you can notice output.c file in the dir
-- so again compile it using gcc `gcc output.c -o output`
+ - Then run `bf <source code>` for example u can run `./bf examples/tic-tac-toe.bf`
+- then you can notice output.s file in the dir
+- so again compile it using gcc `gcc -nostdlib -o output output.s`
 
 **I am too lazy too make a Makefile but maybe later.**
 
-### Currently this is a very basic transpiler but I have plans to actually make it compiler by making it compiled to assembly and also the c code is not perfect as I tried to write it in 30 min.
+### Currently this is a very basic compiler and have plans later to optimize it and make it more robust
