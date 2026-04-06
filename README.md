@@ -12,6 +12,4 @@ A simple **Brainfuck-to-x86-64 assembly** that converts Brainfuck code into lowe
 - then you can notice output.s file in the dir
 - so again compile it using gcc `gcc -nostdlib -o output output.s`
 
-**I am too lazy too make a Makefile but maybe later.**
-
 ### Currently this is a very basic compiler and have plans later to optimize it and make it more robust
